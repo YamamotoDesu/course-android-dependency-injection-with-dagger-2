@@ -68,7 +68,7 @@ class QuestionsListMvc(
         questionsAdapter.bindData(questions)
     }
 
-    fun <T : View> findViewById(@IdRes id: Int): T {
+    private fun <T : View> findViewById(@IdRes id: Int): T {
         return rootView.findViewById<T>(id)
     }
 
@@ -111,6 +111,5 @@ class QuestionsListMvc(
         override fun getItemCount(): Int {
             return questionsList.size
         }
-
     }
 }
