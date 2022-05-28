@@ -8,3 +8,5 @@
 3. [Base Class for MVC Views](https://github.com/YamamotoDesu/course-android-dependency-injection-with-dagger-2/commit/68f362bad34cfc8dedcc6ad85667ca544227f508)
 
 4. [Extraction of Network Logics](https://github.com/YamamotoDesu/course-android-dependency-injection-with-dagger-2/commit/6e960fed45561f1fe5c24d10e1d056300dc07296)
+
+5. [Extraction of Activity](https://github.com/techyourchance/course-android-dependency-injection-with-dagger-2/commit/ecc0bf5d9af2e8ee67ce29c76080aad052471731)
