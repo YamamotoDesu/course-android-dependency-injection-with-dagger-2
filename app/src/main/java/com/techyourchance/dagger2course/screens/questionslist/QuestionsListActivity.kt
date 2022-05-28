@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.techyourchance.dagger2course.questions.FetchQuestionsUseCase
 import com.techyourchance.dagger2course.questions.Question
+import com.techyourchance.dagger2course.screens.common.ScreenNavigator
+import com.techyourchance.dagger2course.screens.common.dialogs.DialogsNavigator
 import com.techyourchance.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import com.techyourchance.dagger2course.screens.questiondetails.QuestionDetailsActivity
 import kotlinx.coroutines.*
@@ -19,6 +21,10 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListMvc.Listener {
 
     private lateinit var fetchQuestioensUseCase: FetchQuestionsUseCase
 
+    private lateinit var dialogsNavigator: DialogsNavigator
+
+    private lateinit var screenNavigator: ScreenNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,7 +33,8 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListMvc.Listener {
         setContentView(viewMvc.rootView)
 
         fetchQuestioensUseCase = FetchQuestionsUseCase()
-
+        dialogsNavigator = DialogsNavigator(supportFragmentManager)
+        screenNavigator = ScreenNavigator(this)
     }
 
     override fun onStart() {
@@ -48,10 +55,6 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListMvc.Listener {
         fetchQuestions()
     }
 
-    override fun onQuestionsClicked(clickedQuestion: Question) {
-        QuestionDetailsActivity.start(this, clickedQuestion.id)
-    }
-
     private fun fetchQuestions() {
         coroutineScope.launch {
             viewMvc.showProgressIndication()
@@ -70,8 +73,10 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListMvc.Listener {
     }
 
     private fun onFetchFailed() {
-        supportFragmentManager.beginTransaction()
-                .add(ServerErrorDialogFragment.newInstance(), null)
-                .commitAllowingStateLoss()
+        dialogsNavigator.showServerErrorDialog()
+    }
+
+    override fun onQuestionsClicked(clickedQuestion: Question) {
+        screenNavigator.toQuestionDetails(clickedQuestion.id)
     }
 }

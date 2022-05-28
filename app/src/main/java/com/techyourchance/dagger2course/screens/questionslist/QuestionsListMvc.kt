@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.techyourchance.dagger2course.R
 import com.techyourchance.dagger2course.questions.Question
-import com.techyourchance.dagger2course.screens.viewmvc.BaseViewMvc
+import com.techyourchance.dagger2course.screens.common.viewmvc.BaseViewMvc
 import java.util.ArrayList
 
 class QuestionsListMvc(
